@@ -1,0 +1,2 @@
+# Extra driver needed only when DATABASE_URL points to PostgreSQL (Supabase / Neon / RDS)
+psycopg2-binary>=2.9

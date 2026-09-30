@@ -1,0 +1,15 @@
+# Render "Blueprint" - one-click deploy definition for the free tier.
+services:
+  - type: web
+    name: cloud-event-rsvp-tracker
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt -r requirements-cloud.txt"
+    startCommand: "uvicorn backend.app:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false   # paste your Supabase/Neon PostgreSQL connection string in the dashboard
+      - key: CORS_ORIGINS
+        value: "*"    # tighten to your actual frontend origin after first deploy
